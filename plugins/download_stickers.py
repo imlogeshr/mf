@@ -105,7 +105,7 @@ async def DownloadStickersBot(bot, update):
         pass
     os.remove(the_real_download_location)
     await bot.edit_message_text(
-        text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG,
+        text="Sticker Downloaded Successfully",
         chat_id=update.chat.id,
         message_id=a.message_id,
         disable_web_page_preview=True
