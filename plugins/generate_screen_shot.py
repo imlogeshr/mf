@@ -61,11 +61,14 @@ async def generate_screen_shot(bot, update):
             )
         )
         if the_real_download_location is not None:
-            await bot.edit_message_text(
+            try:
+               await bot.edit_message_text(
                 text=Translation.SAVED_RECVD_DOC_FILE,
                 chat_id=update.chat.id,
                 message_id=a.message_id
             )
+            except:
+                pass
             tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id)
             if not os.path.isdir(tmp_directory_for_each_user):
                 os.makedirs(tmp_directory_for_each_user)
@@ -117,7 +120,7 @@ async def generate_screen_shot(bot, update):
             except:
                 pass
             await bot.edit_message_text(
-                text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG,
+                text="Screenshot Generated Successfully",
                 chat_id=update.chat.id,
                 message_id=a.message_id,
                 disable_web_page_preview=True
