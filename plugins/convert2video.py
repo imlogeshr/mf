@@ -39,7 +39,7 @@ from PIL import Image
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["convert2video"]))
 async def convert2video(bot, update):
-    if update.from_user.id in Config.BANNED_USERS:
+    if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
             chat_id=update.chat.id,
             message_ids=update.message_id,
