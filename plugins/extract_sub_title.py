@@ -25,7 +25,6 @@ else:
 from translation import Translation
 
 import pyrogram
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 from helper_funcs.chat_base import TRChatBase
 
@@ -50,7 +49,7 @@ async def extractsubtitle(video_file, output_directory):
 @pyrogram.Client.on_message(pyrogram.Filters.command(["extractsubtitle"]))
 async def extract_sub_title(bot, update):
     TRChatBase(update.from_user.id, update.text, "extract_sub_title")
-    if str(update.from_user.id) not in Config.AUTH_USERS:
+    if update.from_user.id not in Config.AUTH_USERS:
         await bot.send_message(
             chat_id=update.chat.id,
             text=Translation.NOT_AUTH_USER_TEXT,
