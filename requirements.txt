@@ -11,3 +11,5 @@ git+https://github.com/surlogu/youtube-dl
 PyDrive
 pyrogram==0.18.0
 ffmpeg-python
+sqlalchemy
+psycopg2-binary
