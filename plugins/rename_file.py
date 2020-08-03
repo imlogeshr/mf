@@ -10,6 +10,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+from pyrogram import Client, Filters
 
 import os
 import time
@@ -34,7 +35,7 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 # https://stackoverflow.com/a/37631799/4723940
 from PIL import Image
-
+from database.database import *
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["rename"]))
 async def rename_doc(bot, update):
@@ -77,13 +78,6 @@ async def rename_doc(bot, update):
 
             except:
                 pass
-            if "IndianMovie" in the_real_download_location:
-                await bot.edit_message_text(
-                    text=Translation.RENAME_403_ERR,
-                    chat_id=update.chat.id,
-                    message_id=a.message_id
-                )
-                return
             new_file_name = download_location + file_name
             os.rename(the_real_download_location, new_file_name)
             end_one = datetime.now()
@@ -136,6 +130,7 @@ async def rename_doc(bot, update):
             end_two = datetime.now()
             try:
                 os.remove(new_file_name)
+                os.remove(thumb_image_path)
                 
             except:
                 pass
