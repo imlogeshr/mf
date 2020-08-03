@@ -30,7 +30,7 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from helper_funcs.chat_base import TRChatBase
 
 
-def extractsubtitle(video_file, output_directory):
+async def extractsubtitle(video_file, output_directory):
     out_put_file_name = output_directory + str(round(time.time())) + ".srt"
     command_to_execute = [
         "ffmpeg",
@@ -48,10 +48,10 @@ def extractsubtitle(video_file, output_directory):
 
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["extractsubtitle"]))
-def extract_sub_title(bot, update):
+async def extract_sub_title(bot, update):
     TRChatBase(update.from_user.id, update.text, "extract_sub_title")
     if str(update.from_user.id) not in Config.AUTH_USERS:
-        bot.send_message(
+        await bot.send_message(
             chat_id=update.chat.id,
             text=Translation.NOT_AUTH_USER_TEXT,
             reply_to_message_id=update.message_id
@@ -67,7 +67,7 @@ def extract_sub_title(bot, update):
                 reply_to_message_id=update.message_id
             )
             sub_title_file_name = extractsubtitle(text, download_location)
-            bot.send_document(
+            await bot.send_document(
                 chat_id=update.chat.id,
                 document=sub_title_file_name,
                 # thumb=thumb_image_path,
@@ -76,20 +76,20 @@ def extract_sub_title(bot, update):
                 reply_to_message_id=update.reply_to_message.message_id
             )
             os.remove(sub_title_file_name)
-            bot.edit_message_text(
+            await bot.edit_message_text(
                 text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG,
                 chat_id=update.chat.id,
                 message_id=a.message_id,
                 disable_web_page_preview=True
             )
         else:
-            bot.send_message(
+            await bot.send_message(
                 chat_id=update.chat.id,
                 text=Translation.REPLY_TO_DOC_OR_LINK_FOR_RARX_SRT,
                 reply_to_message_id=update.message_id
             )
     else:
-        bot.send_message(
+        await bot.send_message(
             chat_id=update.chat.id,
             text=Translation.REPLY_TO_DOC_OR_LINK_FOR_RARX_SRT,
             reply_to_message_id=update.message_id
