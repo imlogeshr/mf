@@ -19,7 +19,7 @@ import time
 if bool(os.environ.get("WEBHOOK", False)):
     from sample_config import Config
 else:
-    from sample_config import Config
+    from config import Config
 
 # the Strings used for this "thing"
 from translation import Translation
@@ -27,6 +27,7 @@ from translation import Translation
 import pyrogram
 
 from helper_funcs.chat_base import TRChatBase
+from helper_funcs.display_progress import progress_for_pyrogram
 
 
 async def extractsubtitle(video_file, output_directory):
@@ -39,12 +40,6 @@ async def extractsubtitle(video_file, output_directory):
         out_put_file_name
     ]
     logger.info(command_to_execute)
-    p = subprocess.Popen(command_to_execute, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-    if not p.returncode and os.path.lexists(video_file):
-        return out_put_file_name
-    else:
-        return None
-
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["extractsubtitle"]))
 async def extract_sub_title(bot, update):
