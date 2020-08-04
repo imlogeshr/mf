@@ -118,8 +118,8 @@ async def convert2file(bot, update):
             c_time = time.time()
             await bot.send_document(
                 chat_id=update.chat.id,
-                document=the_real_download_location,
-                caption=description,
+                document=file_name,
+                caption=description.format(file_name),
                 # reply_markup=reply_markup,
                 thumb=thumb_image_path,
                 reply_to_message_id=update.reply_to_message.message_id,
