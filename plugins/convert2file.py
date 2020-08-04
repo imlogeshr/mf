@@ -116,14 +116,10 @@ async def convert2file(bot, update):
             # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
             # try to upload file
             c_time = time.time()
-            await bot.send_file(
+            await bot.send_document(
                 chat_id=update.chat.id,
-                file=the_real_download_location,
-                caption=description,
-                duration=duration,
-                width=width,
-                height=height,
-                supports_streaming=false,
+                document=the_real_download_location,
+                caption=file_name+description,
                 # reply_markup=reply_markup,
                 thumb=thumb_image_path,
                 reply_to_message_id=update.reply_to_message.message_id,
