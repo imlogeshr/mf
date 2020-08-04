@@ -113,6 +113,14 @@ async def rename_doc(bot, update):
                 img.save(thumb_image_path, "JPEG")
                 # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
             c_time = time.time()
+            inline_keyboard = []
+            inline_keyboard.append([
+            pyrogram.InlineKeyboardButton(
+            text="Read This?",
+            await bot.edit_message("rename cancelled")
+            )
+            ])
+            reply_markup = pyrogram.InlineKeyboardMarkup(inline_keyboard)
             await bot.send_document(
                 chat_id=update.chat.id,
                 document=new_file_name,
