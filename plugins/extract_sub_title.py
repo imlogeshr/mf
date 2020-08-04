@@ -55,7 +55,7 @@ async def extract_sub_title(bot, update):
     if update.reply_to_message is not None:
         text = update.reply_to_message.text
         if text is not None and text.startswith("http"):
-            a = bot.send_message(
+            a = await bot.send_message(
                 chat_id=update.chat.id,
                 text=Translation.UPLOAD_START,
                 reply_to_message_id=update.message_id
