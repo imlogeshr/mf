@@ -80,7 +80,7 @@ async def convert2file(bot, update):
             )
         except:
             pass
-            new_file_name = download_location + file_name
+            new_file_name = the_real_download_location + file_name
             naminc = description.format(file_name)
             logger.info(the_real_download_location)
             # get the correct width, height, and duration for files greater than 10MB
