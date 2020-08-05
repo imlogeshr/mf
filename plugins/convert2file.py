@@ -81,7 +81,7 @@ async def convert2file(bot, update):
         except:
             pass
             new_file_name = download_location + file_name
-            description = Translation.CUSTOM_CAPTION_UL_FILE.format(file_name)
+            naminc = description.format(file_name)
             logger.info(the_real_download_location)
             # get the correct width, height, and duration for files greater than 10MB
             # ref: message from @BotSupport
@@ -124,7 +124,7 @@ async def convert2file(bot, update):
             await bot.send_document(
                 chat_id=update.chat.id,
                 document=new_file_name,
-                caption=description,
+                caption=naminc,
                 # reply_markup=reply_markup,
                 thumb=thumb_image_path,
                 reply_to_message_id=update.reply_to_message.message_id,
