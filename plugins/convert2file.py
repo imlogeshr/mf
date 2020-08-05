@@ -45,6 +45,16 @@ async def convert2file(bot, update):
             revoke=True
         )
         return
+    async def button(bot, update: CallbackQuery):
+    LOGGER.info(update)
+    if update.from_user.id != update.message.reply_to_message.from_user.id:
+     return None
+    await update.answer()
+    cb_data = update.data
+    if cb_data.startswith("cancelbutton"):
+      await bot.delete_message()
+    else:
+      return none
     TRChatBase(update.from_user.id, update.text, "convert2file")
     if update.reply_to_message is not None:
         description = " ",
@@ -116,11 +126,19 @@ async def convert2file(bot, update):
             # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
             # try to upload file
             c_time = time.time()
+            inline_keyboard = []
+            inline_keyboard.append([
+            pyrogram.InlineKeyboardButton(
+              text="cancel",
+              callback_data=("cancelbutton").encode("UTF-8")
+              )
+            ])
+            reply_markup = pyrogram.InlineKeyboardMarkup(inline_keyboard)
             await bot.send_document(
                 chat_id=update.chat.id,
                 document=the_real_download_location,
                 caption=description,
-                # reply_markup=reply_markup,
+                reply_markup=reply_markup,
                 thumb=thumb_image_path,
                 reply_to_message_id=update.reply_to_message.message_id,
                 progress=progress_for_pyrogram,
