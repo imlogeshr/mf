@@ -30,7 +30,7 @@ from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
 
 
-async def extractsubtitle(video_file, output_directory):
+async def extractsubtitle(video_file, Config.DOWNLOAD_LOCATION):
     out_put_file_name = Config.DOWNLOAD_LOCATION + str(round(time.time())) + ".srt"
     command_to_execute = [
         "ffmpeg",
