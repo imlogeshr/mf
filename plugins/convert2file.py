@@ -25,6 +25,7 @@ else:
 from translation import Translation
 
 import pyrogram
+from pyrogram import CallbackQuery
 
 from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
