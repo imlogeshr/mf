@@ -61,7 +61,6 @@ async def rename_doc(bot, update):
         the_real_download_location = await bot.download_media(
             message=update.reply_to_message,
             file_name=download_location,
-            mime_type=download_location,
             progress=progress_for_pyrogram,
             progress_args=(
                 Translation.DOWNLOAD_START,
@@ -79,7 +78,7 @@ async def rename_doc(bot, update):
 
             except:
                 pass
-            new_file_name = download_location + file_name + mime_type
+            new_file_name = download_location + file_name 
             os.rename(the_real_download_location, new_file_name)
             end_one = datetime.now()
             await bot.edit_message_text(
