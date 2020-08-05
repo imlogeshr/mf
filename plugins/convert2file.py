@@ -38,6 +38,13 @@ from PIL import Image
 
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["convert2file"]))
+async def button(bot, update: CallbackQuery):
+    await update.answer()
+    cb_data = update.data
+    if cb_data.startswith("cancelbutton"):
+      await bot.delete_message()
+    else:
+      return none
 async def convert2file(bot, update):
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
@@ -46,15 +53,6 @@ async def convert2file(bot, update):
             revoke=True
         )
         return
-async def button(bot, update: CallbackQuery):
-    if update.from_user.id != update.message.reply_to_message.from_user.id:
-     return None
-    await update.answer()
-    cb_data = update.data
-    if cb_data.startswith("cancelbutton"):
-      await bot.delete_message()
-    else:
-      return none
     TRChatBase(update.from_user.id, update.text, "convert2file")
     if update.reply_to_message is not None:
         description = " ",
