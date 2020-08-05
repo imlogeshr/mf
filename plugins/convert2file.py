@@ -47,7 +47,7 @@ async def convert2file(bot, update):
         return
     TRChatBase(update.from_user.id, update.text, "convert2file")
     if update.reply_to_message is not None:
-        description = Translation.CUSTOM_CAPTION_UL_FILE,
+        description = Translation.CUSTOM_CAPTION_UL_FILE.format(file_name),
         download_location = Config.DOWNLOAD_LOCATION + "/"
         a = await bot.send_message(
             chat_id=update.chat.id,
@@ -119,7 +119,7 @@ async def convert2file(bot, update):
             await bot.send_document(
                 chat_id=update.chat.id,
                 document=the_real_download_location,
-                caption=description.format(file_name),
+                caption=description,
                 # reply_markup=reply_markup,
                 thumb=thumb_image_path,
                 reply_to_message_id=update.reply_to_message.message_id,
