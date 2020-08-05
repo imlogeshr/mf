@@ -45,8 +45,7 @@ async def convert2file(bot, update):
             revoke=True
         )
         return
-    async def button(bot, update: CallbackQuery):
-    LOGGER.info(update)
+async def button(bot, update: CallbackQuery):
     if update.from_user.id != update.message.reply_to_message.from_user.id:
      return None
     await update.answer()
