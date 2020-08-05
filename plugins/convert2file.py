@@ -72,11 +72,15 @@ async def convert2file(bot, update):
                 message_id=a.message_id
             )
             # don't care about the extension
+        try:
             await bot.edit_message_text(
                 text=Translation.UPLOAD_START,
                 chat_id=update.chat.id,
                 message_id=a.message_id
             )
+        except:
+            pass
+            new_file_name = download_location + file_name
             logger.info(the_real_download_location)
             # get the correct width, height, and duration for files greater than 10MB
             # ref: message from @BotSupport
@@ -118,7 +122,7 @@ async def convert2file(bot, update):
             c_time = time.time()
             await bot.send_document(
                 chat_id=update.chat.id,
-                document=file_name,
+                document=new_file_name,
                 caption=description.format(file_name),
                 # reply_markup=reply_markup,
                 thumb=thumb_image_path,
