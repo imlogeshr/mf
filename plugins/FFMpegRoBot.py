@@ -26,7 +26,7 @@ from translation import Translation
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
-from helper_funcs.chat_base import TRChatBase
+#from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
 from helper_funcs.help_Nekmo_ffmpeg import take_screen_shot, cult_small_video
 
@@ -43,7 +43,7 @@ async def ffmpegrobot_ad(bot, update):
             revoke=True
         )
         return
-    TRChatBase(update.from_user.id, update.text, "ffmpegrobot")
+    #TRChatBase(update.from_user.id, update.text, "ffmpegrobot")
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.FF_MPEG_RO_BOT_AD_VER_TISE_MENT,
@@ -61,7 +61,7 @@ async def trim(bot, update):
             revoke=True
         )
         return
-    TRChatBase(update.from_user.id, update.text, "trim")
+    #TRChatBase(update.from_user.id, update.text, "trim")
     saved_file_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".FFMpegRoBot.mkv"
     if os.path.exists(saved_file_path):
         a = await bot.send_message(
@@ -177,7 +177,7 @@ async def storage_info(bot, update):
             revoke=True
         )
         return
-    TRChatBase(update.from_user.id, update.text, "storageinfo")
+    #TRChatBase(update.from_user.id, update.text, "storageinfo")
     saved_file_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".FFMpegRoBot.mkv"
     if os.path.exists(saved_file_path):
         metadata = extractMetadata(createParser(saved_file_path))
@@ -207,7 +207,7 @@ async def clear_media(bot, update):
             revoke=True
         )
         return
-    TRChatBase(update.from_user.id, update.text, "clearffmpegmedia")
+    #TRChatBase(update.from_user.id, update.text, "clearffmpegmedia")
     saved_file_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".FFMpegRoBot.mkv"
     if os.path.exists(saved_file_path):
         os.remove(saved_file_path)
@@ -227,7 +227,7 @@ async def download_media(bot, update):
             revoke=True
         )
         return
-    TRChatBase(update.from_user.id, update.text, "downloadmedia")
+    #TRChatBase(update.from_user.id, update.text, "downloadmedia")
     saved_file_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".FFMpegRoBot.mkv"
     if not os.path.exists(saved_file_path):
         a = await bot.send_message(
