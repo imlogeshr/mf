@@ -41,7 +41,7 @@ async def unzip(bot, update):
             revoke=True
         )
         return
-    TRChatBase(update.from_user.id, update.text, "unzip")
+    #TRChatBase(update.from_user.id, update.text, "unzip")
     saved_file_path = Config.DOWNLOAD_LOCATION + \
         "/" + str(update.from_user.id) + ".unzip.zip"
     if os.path.exists(saved_file_path):
