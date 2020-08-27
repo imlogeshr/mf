@@ -26,7 +26,7 @@ from translation import Translation
 
 import pyrogram
 
-from helper_funcs.chat_base import TRChatBase
+#from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
 
 
@@ -43,7 +43,7 @@ async def extractsubtitle(video_file, output_directory):
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["extractsubtitle"]))
 async def extract_sub_title(bot, update):
-    TRChatBase(update.from_user.id, update.text, "extract_sub_title")
+    #TRChatBase(update.from_user.id, update.text, "extract_sub_title")
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.send_message(
             chat_id=update.chat.id,
