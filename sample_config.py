@@ -34,5 +34,5 @@ class Config(object):
     FINISHED_PROGRESS_STR = os.environ.get("FINISHED_PROGRESS_STR", "▰")
     UN_FINISHED_PROGRESS_STR = os.environ.get("UN_FINISHED_PROGRESS_STR", "▱")
     # Sql Database url
-    DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://surlogu:surlogu@cluster0-fqkgg.mongodb.net/test?retryWrites=true&w=majority")
+    DB_URI = os.environ.get("DATABASE_URL", "")
 
