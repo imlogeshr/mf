@@ -28,7 +28,7 @@ from translation import Translation
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
-from helper_funcs.chat_base import TRChatBase
+#from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
 
 from hachoir.metadata import extractMetadata
@@ -113,6 +113,7 @@ async def rename_doc(bot, update):
                 img.save(thumb_image_path, "JPEG")
                 # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
             c_time = time.time()
+            await bot.send_chat_action(chat_id,'UPLOAD_DOCUMENT')
             await bot.send_document(
                 chat_id=update.chat.id,
                 document=new_file_name,
@@ -130,7 +131,7 @@ async def rename_doc(bot, update):
             end_two = datetime.now()
             try:
                 os.remove(new_file_name)
-                os.remove(thumb_image_path)
+                #os.remove(thumb_image_path)
                 
             except:
                 pass
