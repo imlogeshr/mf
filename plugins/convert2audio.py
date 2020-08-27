@@ -25,7 +25,7 @@ from translation import Translation
 
 import pyrogram
 
-from helper_funcs.chat_base import TRChatBase
+#from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
 
 from hachoir.metadata import extractMetadata
@@ -43,7 +43,7 @@ async def convert2audio(bot, update):
             revoke=True
         )
         return
-    TRChatBase(update.from_user.id, update.text, "convert2audio")
+    #TRChatBase(update.from_user.id, update.text, "convert2audio")
     if (update.reply_to_message is not None) and (update.reply_to_message.media is not None) :
         description = Translation.CUSTOM_CAPTION_UL_FILE
         download_location = Config.DOWNLOAD_LOCATION + "/"
