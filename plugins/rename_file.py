@@ -35,6 +35,7 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 # https://stackoverflow.com/a/37631799/4723940
 from PIL import Image
+from helper_funcs.database import *
 
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["rename"]))
@@ -78,18 +79,24 @@ async def rename_doc(bot, update):
 
             except:
                 pass
-            new_file_name = download_location + file_name 
+            new_file_name = download_location + file_name
             os.rename(the_real_download_location, new_file_name)
             end_one = datetime.now()
             await bot.edit_message_text(
                 text=Translation.UPLOAD_START,
                 chat_id=update.chat.id,
                 message_id=a.message_id
-            )
+                )
             logger.info(the_real_download_location)
             thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
             if not os.path.exists(thumb_image_path):
-                thumb_image_path = None
+                mes = await get_thumb(update.from_user.id)
+                if mes != None:
+                    m = await bot.get_messages(update.chat.id, mes.msg_id)
+                    await m.download(file_name=thumb_image_path)
+                    thumb_image_path = thumb_image_path
+                else:
+                    thumb_image_path = None
             else:
                 width = 0
                 height = 0
@@ -131,7 +138,7 @@ async def rename_doc(bot, update):
             end_two = datetime.now()
             try:
                 os.remove(new_file_name)
-                #os.remove(thumb_image_path)
+                os.remove(thumb_image_path)
                 
             except:
                 pass
