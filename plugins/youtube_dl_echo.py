@@ -44,7 +44,7 @@ async def echo(bot, update):
         )
         return
     # logger.info(update)
-    TRChatBase(update.from_user.id, update.text, "/echo")
+    #TRChatBase(update.from_user.id, update.text, "/echo")
     # await bot.send_chat_action(
     #     chat_id=update.chat.id,
     #     action="typing"
