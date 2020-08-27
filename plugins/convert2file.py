@@ -26,7 +26,7 @@ from translation import Translation
 
 import pyrogram
 
-from helper_funcs.chat_base import TRChatBase
+#from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
 from helper_funcs.help_Nekmo_ffmpeg import take_screen_shot
 
@@ -45,7 +45,7 @@ async def convert2file(bot, update):
             revoke=True
         )
         return
-    TRChatBase(update.from_user.id, update.text, "convert2file")
+    #TRChatBase(update.from_user.id, update.text, "convert2file")
     if update.reply_to_message is not None:
         description = " ",
         download_location = Config.DOWNLOAD_LOCATION + "/"
