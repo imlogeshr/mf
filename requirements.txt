@@ -8,3 +8,5 @@ https://github.com/pyrogram/pyrogram/archive/asyncio-dev.zip
 requests
 tgcrypto
 git+https://github.com/surlogu/youtube-dl
+sqlalchemy
+psycopg2-binary
