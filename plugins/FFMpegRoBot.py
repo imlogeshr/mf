@@ -103,7 +103,7 @@ async def trim(bot, update):
                 os.remove(o)
                 await bot.edit_message_text(
                     chat_id=update.chat.id,
-                    text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG,
+                    text=Translation.AFTER_SUCCESSFUL_UPLOAD,
                     disable_web_page_preview=True,
                     message_id=a.message_id
                 )
@@ -149,7 +149,7 @@ async def trim(bot, update):
                 os.remove(o)
                 await bot.edit_message_text(
                     chat_id=update.chat.id,
-                    text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG,
+                    text=Translation.AFTER_SUCCESSFUL_UPLOAD,
                     disable_web_page_preview=True,
                     message_id=a.message_id
                 )
