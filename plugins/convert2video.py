@@ -47,7 +47,7 @@ async def conv2video(bot, update):
         return
     #TRChatBase(update.from_user.id, update.text, "convert2video")
     if update.reply_to_message.document is not None:
-        description = Translation.CUSTOM_CAPTION_UL_FILE.format(file_name)
+        description = Translation.CUSTOM_CAPTION_UL_FILE
         download_location = Config.DOWNLOAD_LOCATION + "/"
         a = await bot.send_message(
             chat_id=update.chat.id,
