@@ -111,7 +111,7 @@ async def conv2video(bot, update):
             await bot.send_video(
                 chat_id=update.chat.id,
                 video=the_real_download_location,
-                caption=description,
+                caption=file_name + description,
                 duration=duration,
                 width=width,
                 height=height,
@@ -133,7 +133,7 @@ async def conv2video(bot, update):
             except:
                 pass
             await bot.edit_message_text(
-                text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG,
+                text=Translation.AFTER_SUCCESSFUL_UPLOAD,
                 chat_id=update.chat.id,
                 message_id=a.message_id,
                 disable_web_page_preview=True
