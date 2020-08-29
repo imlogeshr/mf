@@ -36,8 +36,8 @@ from hachoir.parser import createParser
 from PIL import Image
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["conv2file"]))
-async def convert2file(bot, update):
+@pyrogram.Client.on_message(pyrogram.Filters.command(["conv2doc"]))
+async def conv2doc(bot, update):
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
             chat_id=update.chat.id,
@@ -45,9 +45,9 @@ async def convert2file(bot, update):
             revoke=True
         )
         return
-    #TRChatBase(update.from_user.id, update.text, "conv2file")
+    #TRChatBase(update.from_user.id, update.text, "conv2doc")
     if update.reply_to_message.video is not None:
-        description = Translation.CUSTOM_CAPTION_UL_FILE.format(file_name)
+        description = Translation.CUSTOM_CAPTION_UL_FILE
         download_location = Config.DOWNLOAD_LOCATION + "/"
         a = await bot.send_message(
             chat_id=update.chat.id,
