@@ -256,7 +256,7 @@ async def echo(bot, update):
             ])
         reply_markup = pyrogram.InlineKeyboardMarkup(inline_keyboard)
         # logger.info(reply_markup)
-        thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
+            thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
             if not os.path.exists(thumb_image_path):
                 mes = await get_thumb(update.from_user.id)
                 if mes != None:
