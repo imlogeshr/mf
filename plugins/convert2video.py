@@ -84,6 +84,8 @@ async def conv2video(bot, update):
             height = 0
             duration = 0
             metadata = extractMetadata(createParser(the_real_download_location))
+            if metadata.has("title"):
+                fname = metadata.get('title')
             if metadata.has("duration"):
                 duration = metadata.get('duration').seconds
             thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
@@ -111,7 +113,7 @@ async def conv2video(bot, update):
             await bot.send_video(
                 chat_id=update.chat.id,
                 video=the_real_download_location,
-                caption=file_name + description,
+                caption=fname + description,
                 duration=duration,
                 width=width,
                 height=height,
