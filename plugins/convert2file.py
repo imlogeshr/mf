@@ -132,7 +132,8 @@ async def convert2file(bot, update):
             )
             try:
                 os.remove(the_real_download_location)
-                os.remove(thumb_image_path)
+                if not os.path.exists(thumb_image_path):
+                    os.remove(thumb_image_path)
             except:
                 pass
             await bot.edit_message_text(
