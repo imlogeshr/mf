@@ -106,7 +106,9 @@ async def youtube_dl_call_back(bot, update):
         message_id=update.message.message_id
     )
     description = Translation.CUSTOM_CAPTION_UL_FILE
-    if "fulltitle" in response_json:
+    if custom_file_name is not None:
+        description = custom_file_name
+    else:
         description = response_json["fulltitle"][0:1021]
         # escape Markdown and special characters
     tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id)
@@ -302,7 +304,7 @@ async def youtube_dl_call_back(bot, update):
                 await bot.send_video(
                     chat_id=update.message.chat.id,
                     video=download_directory,
-                    caption=custom_file_name + description,
+                    caption=description,
                     parse_mode="HTML",
                     duration=duration,
                     width=width,
