@@ -34,8 +34,8 @@ from hachoir.parser import createParser
 from PIL import Image
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["convert2audio"]))
-async def convert2audio(bot, update):
+@pyrogram.Client.on_message(pyrogram.Filters.command(["conv2aud"]))
+async def conv2aud(bot, update):
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
             chat_id=update.chat.id,
@@ -126,13 +126,13 @@ async def convert2audio(bot, update):
                 )
             )
             try:
-                os.remove(thumb_image_path)
+               #os.remove(thumb_image_path)
                 os.remove(the_real_download_location)
                 os.remove(audio_file_location_path)
             except:
                 pass
             await bot.edit_message_text(
-                text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG,
+                text=Translation.AFTER_SUCCESSFUL_UPLOAD,
                 chat_id=update.chat.id,
                 message_id=a.message_id,
                 disable_web_page_preview=True
