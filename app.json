@@ -52,6 +52,10 @@
       "description": "should be a single character.",
       "required": false
     },
+    "DATABASE_URL": {
+      "description": "database url",
+      "required": false
+	}
     "UN_FINISHED_PROGRESS_STR": {
       "description": "should be a single character.",
       "required": false
