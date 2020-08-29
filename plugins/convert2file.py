@@ -84,6 +84,8 @@ async def conv2doc(bot, update):
             height = 0
             duration = 0
             metadata = extractMetadata(createParser(the_real_download_location))
+            if metadata.has("filename"):
+                fname = metadata.get('filename')
             if metadata.has("duration"):
                 duration = metadata.get('duration').seconds
             thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
@@ -108,11 +110,10 @@ async def conv2doc(bot, update):
                 # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
             # try to upload file
             c_time = time.time()
-            current_file_name = os.path.join(the_real_download_location, file_name)
             await bot.send_document(
                 chat_id=update.chat.id,
-                document=current_file_name,
-                caption=file_name + description,
+                document=the_real_download_location,
+                caption=fname + description,
                 #reply_markup=reply_markup,
                 thumb=thumb_image_path,
                 reply_to_message_id=update.reply_to_message.message_id,
