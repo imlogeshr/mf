@@ -36,8 +36,8 @@ from hachoir.parser import createParser
 from PIL import Image
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["convert2video"]))
-async def convert2video(bot, update):
+@pyrogram.Client.on_message(pyrogram.Filters.command(["conv2video"]))
+async def conv2video(bot, update):
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
             chat_id=update.chat.id,
@@ -46,7 +46,7 @@ async def convert2video(bot, update):
         )
         return
     #TRChatBase(update.from_user.id, update.text, "convert2video")
-    if update.reply_to_message.video is not None:
+    if update.reply_to_message.document is not None:
         description = Translation.CUSTOM_CAPTION_UL_FILE
         download_location = Config.DOWNLOAD_LOCATION + "/"
         a = await bot.send_message(
