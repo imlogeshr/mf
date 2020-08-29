@@ -84,7 +84,7 @@ async def convert2file(bot, update):
             height = 0
             duration = 0
             metadata = extractMetadata(createParser(the_real_download_location))
-            if metadat.has("title"):
+            if metadata.has("title"):
                 fname = metadata.get('title')
             if metadata.has("duration"):
                 duration = metadata.get('duration').seconds
