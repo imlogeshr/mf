@@ -88,14 +88,15 @@ async def convert2video(bot, update):
                 duration = metadata.get('duration').seconds
             thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
             if not os.path.exists(thumb_image_path):
-                thumb_image_path = await take_screen_shot(
-                    the_real_download_location,
-                    os.path.dirname(the_real_download_location),
-                    random.randint(
-                        0,
-                        duration - 1
-                    )
-                )
+                thumb_image_path = none
+                #thumb_image_path = await take_screen_shot(
+                    #the_real_download_location,
+                    #os.path.dirname(the_real_download_location),
+                    #random.randint(
+                        #0,
+                        #duration - 1
+                    #)
+                #)
             logger.info(thumb_image_path)
             # 'thumb_image_path' will be available now
             metadata = extractMetadata(createParser(thumb_image_path))
@@ -136,8 +137,8 @@ async def convert2video(bot, update):
             )
             try:
                 os.remove(the_real_download_location)
-                if not os.path.exists(thumb_image_path):
-                    os.remove(thumb_image_path)
+                #if not os.path.exists(thumb_image_path):
+                    #os.remove(thumb_image_path)
             except:
                 pass
             await bot.edit_message_text(
