@@ -84,8 +84,6 @@ async def conv2doc(bot, update):
             height = 0
             duration = 0
             metadata = extractMetadata(createParser(the_real_download_location))
-            if metadata.has("filename"):
-                fname = metadata.get('filename')
             if metadata.has("duration"):
                 duration = metadata.get('duration').seconds
             thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
@@ -113,7 +111,7 @@ async def conv2doc(bot, update):
             await bot.send_document(
                 chat_id=update.chat.id,
                 document=the_real_download_location,
-                caption=fname + description,
+                caption=description,
                 #reply_markup=reply_markup,
                 thumb=thumb_image_path,
                 reply_to_message_id=update.reply_to_message.message_id,
