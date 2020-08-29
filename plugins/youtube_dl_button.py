@@ -355,8 +355,8 @@ async def youtube_dl_call_back(bot, update):
             #
             try:
                 shutil.rmtree(tmp_directory_for_each_user)
-                if os.path.not exists(thumb_image_path):
-                   os.remove(thumb_image_path)
+                #if os.path.not exists(thumb_image_path):
+                   #os.remove(thumb_image_path)
             except:
                 pass
             await bot.edit_message_text(
