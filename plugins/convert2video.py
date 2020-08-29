@@ -47,7 +47,7 @@ async def conv2video(bot, update):
         return
     #TRChatBase(update.from_user.id, update.text, "convert2video")
     if update.reply_to_message.document is not None:
-        description = Translation.CUSTOM_CAPTION_UL_FILE
+        description = Translation.CUSTOM_CAPTION_UL_FILE.format(file_name)
         download_location = Config.DOWNLOAD_LOCATION + "/"
         a = await bot.send_message(
             chat_id=update.chat.id,
@@ -84,8 +84,6 @@ async def conv2video(bot, update):
             height = 0
             duration = 0
             metadata = extractMetadata(createParser(the_real_download_location))
-            if metadata.has("title"):
-                fname = metadata.get('title')
             if metadata.has("duration"):
                 duration = metadata.get('duration').seconds
             thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
@@ -113,7 +111,7 @@ async def conv2video(bot, update):
             await bot.send_video(
                 chat_id=update.chat.id,
                 video=the_real_download_location,
-                caption=fname + description,
+                caption=description,
                 duration=duration,
                 width=width,
                 height=height,
