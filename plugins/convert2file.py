@@ -36,7 +36,7 @@ from hachoir.parser import createParser
 from PIL import Image
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["convert2file"]))
+@pyrogram.Client.on_message(pyrogram.Filters.command(["conv2file"]))
 async def convert2file(bot, update):
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
@@ -45,9 +45,9 @@ async def convert2file(bot, update):
             revoke=True
         )
         return
-    #TRChatBase(update.from_user.id, update.text, "convert2file")
-    if update.reply_to_message is not None:
-        description = " ",
+    #TRChatBase(update.from_user.id, update.text, "conv2file")
+    if update.reply_to_message.video is not None:
+        description = Translation.CUSTOM_CAPTION_UL_FILE
         download_location = Config.DOWNLOAD_LOCATION + "/"
         a = await bot.send_message(
             chat_id=update.chat.id,
@@ -78,48 +78,42 @@ async def convert2file(bot, update):
                 message_id=a.message_id
             )
             logger.info(the_real_download_location)
-            # get the correct width, height, and duration for files greater than 10MB
+            # get the correct width, height, and duration for videos greater than 10MB
             # ref: message from @BotSupport
             width = 0
             height = 0
             duration = 0
             metadata = extractMetadata(createParser(the_real_download_location))
+            if metadat.has("title"):
+                fname = metadata.get('title')
             if metadata.has("duration"):
                 duration = metadata.get('duration').seconds
             thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
             if not os.path.exists(thumb_image_path):
-                thumb_image_path = await take_screen_shot(
-                    the_real_download_location,
-                    os.path.dirname(the_real_download_location),
-                    random.randint(
-                        0,
-                        duration - 1
-                    )
-                )
-            logger.info(thumb_image_path)
-            # 'thumb_image_path' will be available now
-            metadata = extractMetadata(createParser(thumb_image_path))
-            if metadata.has("width"):
-                width = metadata.get("width")
-            if metadata.has("height"):
-                height = metadata.get("height")
-            # get the correct width, height, and duration for files greater than 10MB
-            # resize image
-            # ref: https://t.me/PyrogramChat/44663
-            # https://stackoverflow.com/a/21669827/4723940
-            Image.open(thumb_image_path).convert("RGB").save(thumb_image_path)
-            img = Image.open(thumb_image_path)
-            # https://stackoverflow.com/a/37631799/4723940
-            # img.thumbnail((90, 90))
-            img.resize((90, height))
-            img.save(thumb_image_path, "JPEG")
-            # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
+                thumb_image_path = None
+            else:
+                metadata = extractMetadata(createParser(thumb_image_path))
+                if metadata.has("width"):
+                    width = metadata.get("width")
+                if metadata.has("height"):
+                    height = metadata.get("height")
+                # get the correct width, height, and duration for videos greater than 10MB
+                # resize image
+                # ref: https://t.me/PyrogramChat/44663
+                # https://stackoverflow.com/a/21669827/4723940
+                Image.open(thumb_image_path).convert("RGB").save(thumb_image_path)
+                img = Image.open(thumb_image_path)
+                # https://stackoverflow.com/a/37631799/4723940
+                # img.thumbnail((90, 90))
+                img.resize((90, height))
+                img.save(thumb_image_path, "JPEG")
+                # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
             # try to upload file
             c_time = time.time()
             await bot.send_document(
                 chat_id=update.chat.id,
                 document=the_real_download_location,
-                caption=description,
+                caption=fname + description,
                 #reply_markup=reply_markup,
                 thumb=thumb_image_path,
                 reply_to_message_id=update.reply_to_message.message_id,
@@ -132,12 +126,12 @@ async def convert2file(bot, update):
             )
             try:
                 os.remove(the_real_download_location)
-                if not os.path.exists(thumb_image_path):
-                    os.remove(thumb_image_path)
+                #if not os.path.exists(thumb_image_path):
+                    #os.remove(thumb_image_path)
             except:
                 pass
             await bot.edit_message_text(
-                text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG,
+                text=Translation.AFTER_SUCCESSFUL_UPLOAD,
                 chat_id=update.chat.id,
                 message_id=a.message_id,
                 disable_web_page_preview=True
@@ -145,6 +139,6 @@ async def convert2file(bot, update):
     else:
         await bot.send_message(
             chat_id=update.chat.id,
-            text=Translation.REPLY_TO_DOC_FOR_C2V,
+            text=Translation.REPLY_TO_DOC_FOR_C2d,
             reply_to_message_id=update.message_id
         )
