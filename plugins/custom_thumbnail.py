@@ -101,6 +101,23 @@ async def save_photo(bot, update):
             reply_to_message_id=update.message_id
         )
 
+@pyrogram.Client.on_message(pyrogram.Filters.command(["viewthumbnail"]))
+async def view_thumbnail(bot, update):
+    if update.from_user.id not in Config.AUTH_USERS:
+        await bot.delete_messages(
+            chat_id=update.chat.id,
+            message_ids=update.message_id,
+            revoke=True
+        )
+        return
+    #TRChatBase(update.from_user.id, update.text, "deletethumbnail")
+    download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id)
+    await bot.send_photo(
+        chat_id=update.chat.id,
+        photo=(download_location + ".jpg"),
+        reply_to_message_id=update.message_id
+    )
+
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["clearthumbnail"]))
 async def delete_thumbnail(bot, update):
