@@ -119,7 +119,7 @@ async def echo(bot, update):
     if youtube_dl_password is not None:
         command_to_exec.append("--password")
         command_to_exec.append(youtube_dl_password)
-        logger.info(command_to_exec)
+        #logger.info(command_to_exec)
     process = await asyncio.create_subprocess_exec(
         *command_to_exec,
         # stdout must a pipe to be accessible as process.stdout
@@ -149,13 +149,9 @@ async def echo(bot, update):
     if t_response:
         # logger.info(t_response)
         x_reponse = t_response
-        response_json = []
         if "\n" in x_reponse:
-            for yu_r in x_reponse.split("\n"):
-                response_json.append(json.loads(yu_r))
-        else:
-            response_json.append(json.loads(x_reponse))
-        # response_json = json.loads(x_reponse)
+            x_reponse, _ = x_reponse.split("\n")
+        response_json = json.loads(x_reponse)
         save_ytdl_json_path = Config.DOWNLOAD_LOCATION + \
             "/" + str(update.from_user.id) + ".json"
         with open(save_ytdl_json_path, "w", encoding="utf8") as outfile:
