@@ -33,7 +33,7 @@ import helper_funcs.database as sql
 
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["savethumbnail"]))
-async def save_photo(bot, update):
+async def savethumbnail(bot, update):
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
             chat_id=update.chat.id,
@@ -41,12 +41,11 @@ async def save_photo(bot, update):
             revoke=True
         )
         return
-    #TRChatBase(update.from_user.id, update.text, "save_photo")
     if update.reply_to_message is not None:
       reply_message = update.reply_to_message
-      if reply_message.media_group_id is not None:
+      if reply_message.image is not None:
         # album is sent
-        download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + "/" + str(reply_message.media_group_id) + "/"
+        download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + "/" + str(reply_message.image) + "/"
         # create download directory, if not exist
         if not os.path.isdir(download_location):
             os.makedirs(download_location)
