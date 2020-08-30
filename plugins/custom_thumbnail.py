@@ -41,11 +41,9 @@ async def savethumbnail(bot, update):
             revoke=True
         )
         return
-    if update.reply_to_message is not None:
-      reply_message = update.reply_to_message
-      if reply_message.media_group_id is not None:
+    if update.reply_to_message.photo is not None:
         # album is sent
-        download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + "/" + str(reply_message.media_group_id) + "/"
+        download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + "/" + str(update.reply_to_message.photo) + "/"
         # create download directory, if not exist
         if not os.path.isdir(download_location):
             os.makedirs(download_location)
