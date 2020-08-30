@@ -121,7 +121,7 @@ async def view_thumbnail(bot, update):
     else:
         await bot.send_message(
             chat_id=update.chat.id,
-            text=Translation.NO_CUSTOM_THUMB_NAIL,
+            text=Translation.NO_CUSTOM_THUMB_NAIL_FOUND,
             reply_to_message_id=update.message_id
      )
 
