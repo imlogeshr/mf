@@ -111,13 +111,19 @@ async def view_thumbnail(bot, update):
         )
         return
     #TRChatBase(update.from_user.id, update.text, "deletethumbnail")
-    download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id)
-    await bot.send_photo(
-        chat_id=update.chat.id,
-        photo=(download_location + ".jpg"),
-        reply_to_message_id=update.message_id
-    )
-
+    download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
+    if os.path.exists(download_location):
+        await bot.send_photo(
+            chat_id=update.chat.id,
+            photo=download_location,
+            reply_to_message_id=update.message_id
+      )
+    else:
+        await bot.send_message(
+            chat_id=update.chat.id,
+            text=Translation.NO_CUSTOM_THUMB_NAIL,
+            reply_to_message_id=update.message_id
+     )
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["clearthumbnail"]))
 async def delete_thumbnail(bot, update):
