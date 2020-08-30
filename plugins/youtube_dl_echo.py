@@ -109,7 +109,7 @@ async def echo(bot, update):
             "-j",
             url
         ]
-        if "hotstar" in url:
+    if "hotstar" in url:
         command_to_exec.append("--geo-bypass-country")
         command_to_exec.append("IN")
     #
