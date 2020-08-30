@@ -42,9 +42,11 @@ async def save_photo(bot, update):
         )
         return
     #TRChatBase(update.from_user.id, update.text, "save_photo")
-    if update.media_group_id is not None:
+    if update.reply_to_message is not None:
+      reply_message = update.reply_to_message
+      if reply_message.media_group_id is not None:
         # album is sent
-        download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + "/" + str(update.media_group_id) + "/"
+        download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + "/" + str(reply_message.media_group_id) + "/"
         # create download directory, if not exist
         if not os.path.isdir(download_location):
             os.makedirs(download_location)
