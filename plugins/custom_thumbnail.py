@@ -32,7 +32,7 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 import helper_funcs.database as sql
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["generatecustomthumbnail"]))
+@pyrogram.Client.on_message(pyrogram.Filters.command(["savethumbnail"]))
 async def save_photo(bot, update):
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
@@ -106,7 +106,7 @@ async def save_photo(bot, update):
         )
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["deletethumbnail"]))
+@pyrogram.Client.on_message(pyrogram.Filters.command(["clearthumbnail"]))
 async def delete_thumbnail(bot, update):
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
