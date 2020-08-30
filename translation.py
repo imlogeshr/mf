@@ -19,8 +19,8 @@ URL | filename | username | password"""
     AFTER_SUCCESSFUL_RENAME_MSG = "✅ Rename Process Completed Successfully in {} seconds." 
     NOT_AUTH_USER_TEXT = "Not Authorised. \n PM to admin @AsEnCEO"
     NOT_AUTH_USER_TEXT_FILE_SIZE = "Detected File Size: {}. Free Users can only upload: {}\nPlease contact @AsEnCEO"
-    SAVED_CUSTOM_THUMB_NAIL = "Custom thumbnail saved successfully👍"
-    DEL_ETED_CUSTOM_THUMB_NAIL = "✅ Custom thumbnail cleared successfully."
+    SAVED_CUSTOM_THUMB_NAIL = "Thumbnail saved successfully 👍"
+    DEL_ETED_CUSTOM_THUMB_NAIL = "✅ Thumbnail cleared successfully."
     FF_MPEG_DEL_ETED_CUSTOM_MEDIA = "✅ Media cleared successfully."
     SAVED_RECVD_DOC_FILE = "Document Downloaded Successfully."
     CUSTOM_CAPTION_UL_FILE = ""
@@ -40,18 +40,19 @@ There is No Expire Limit"""
    DFile  - Give File with Screenshots
    Video  - Give File as video without Screenshots
    File   - Give File without ScreenshotsUpload as file from any HTTP link, with custom thumbnail support</a>
-📌 /savethumbnail - save Custom Thumbnail
-📌 /clearthumbnail - Delete / Clear saved Custom Thumbnail
-📌 /getlink - Get Low Speed Direct Download Link
-📌 /conv2aud - Convert Video Files in Telegram to Telegram Audios
-📌 /conv2vid - Convert to Streamable Video
-📌 /conv2doc - Convert to Document
 📌 /rename - (Long Press) and Rename Telegram Media
-📌 /ffmpeginfo - Get Info
-📌 /trim - (Long Press) and Enter TimeStamp
+📌 /conv2doc - Convert to Document
+📌 /conv2vid - Convert to Streamable Video
+📌 /conv2aud - Convert Video Files in Telegram to Telegram Audio
+📌 /savethumbnail - save Custom Thumbnail
+📌 /viewthumbnail - view Custom Thumbnail
+📌 /clearthumbnail - clear saved Custom Thumbnail
+📌 /getlink - Get Low Speed Direct Download Link
 📌 /savevid - Download media to storage
+📌 /trim - (Long Press) and Enter TimeStamp
 📌 /storageinfo - Get Info about currently saved Media in storage
 📌 /clearvid - Clear stored media from storage
+📌 /ffmpeginfo - Get Info
 📌 /unzip - Extract Compressed Files, inside Telegram
 📌 /generatescss - Generate SCreenShotS of Telegram media"""
     REPLY_TO_DOC_GET_LINK = "Reply to a Telegram media to get High Speed Direct Download Link"
