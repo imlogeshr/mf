@@ -24,15 +24,15 @@
     },
     "TG_BOT_TOKEN": {
       "description": "Your bot token, as a string.",
-      "value": "1218897240:AAGShEiIJTF677W8Y6LjVu15BybH9lPIswU"
+      "value": ""
     },
     "APP_ID": {
       "description": "Get this value from https://my.telegram.org",
-      "value": "1036924"
+      "value": ""
     },
     "API_HASH": {
       "description": "Get this value from https://my.telegram.org",
-      "value": "a9f587e85475eb58c96a76f0cd9b9abf"
+      "value": ""
     },
     "AUTH_USERS": {
       "description": "allow only pre-defined users to use this bot",
@@ -40,7 +40,7 @@
     },
     "DEF_THUMB_NAIL_VID_S": {
       "description": "default thumbnail to be used in the videos. Incase, youtube-dl is unable to find a thumbnail.",
-      "value": "https://telegra.ph/file/281b2f00cdc992c67c1dc.jpg",
+      "value": "",
       "required": false
     },
     "HTTP_PROXY": {
@@ -50,10 +50,6 @@
     },
     "FINISHED_PROGRESS_STR": {
       "description": "should be a single character.",
-      "required": false
-    },
-    "DATABASE_URL": {
-      "description": "database url",
       "required": false
     },
     "UN_FINISHED_PROGRESS_STR": {
