@@ -181,7 +181,7 @@ async def youtube_dl_call_back(bot, update):
         try:
             dir_contents = len(os.listdir(tmp_directory_for_each_user))
         # dir_contents.sort()
-        await bot.update.message.edit_caption(
+        await update.message.edit_caption(
             caption=f"found {dir_contents} files"
         )
         user_id = update.from_user.id
