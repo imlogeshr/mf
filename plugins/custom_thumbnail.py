@@ -41,15 +41,15 @@ async def savethumbnail(bot, update):
             revoke=True
         )
         return
-    if update.reply_to_message is not None:
+    if update.reply_to_message.media_group_id is not None:
         # album is sent
-        download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + "/" + str(update.reply_to_message) + "/"
+        download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + "/" + str(update.reply_to_message.media_group_id) + "/"
         # create download directory, if not exist
         if not os.path.isdir(download_location):
             os.makedirs(download_location)
         await sql.df_thumb(update.from_user.id, update.message_id)
         await bot.download_media(
-            message=update,
+            message=update.reply_to_message,
             file_name=download_location
         )
     else:
@@ -57,7 +57,7 @@ async def savethumbnail(bot, update):
         download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
         await sql.df_thumb(update.from_user.id, update.message_id)
         await bot.download_media(
-            message=update,
+            message=update.reply_to_message,
             file_name=download_location
         )
         await bot.send_message(
