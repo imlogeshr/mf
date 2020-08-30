@@ -117,7 +117,8 @@ async def youtube_dl_call_back(bot, update):
     download_directory = tmp_directory_for_each_user
     LOGGER.info(download_directory)
     download_directory = os.path.join(tmp_directory_for_each_user, custom_file_name)
-    LOGGER.info(download_directory)    command_to_exec = []
+    LOGGER.info(download_directory)
+    command_to_exec = []
     if tg_send_type == "audio":
         command_to_exec = [
             "youtube-dl",
