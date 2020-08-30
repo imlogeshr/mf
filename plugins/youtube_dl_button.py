@@ -114,13 +114,15 @@ async def youtube_dl_call_back(bot, update):
     tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id)
     if not os.path.isdir(tmp_directory_for_each_user):
         os.makedirs(tmp_directory_for_each_user)
-    download_directory = tmp_directory_for_each_user + "/" + custom_file_name
-    command_to_exec = []
+    download_directory = tmp_directory_for_each_user
+    LOGGER.info(download_directory)
+    download_directory = os.path.join(tmp_directory_for_each_user, custom_file_name)
+    LOGGER.info(download_directory)    command_to_exec = []
     if tg_send_type == "audio":
         command_to_exec = [
             "youtube-dl",
             "-c",
-            "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
+            #"--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--prefer-ffmpeg",
             "--extract-audio",
             "--audio-format", youtube_dl_ext,
@@ -132,11 +134,18 @@ async def youtube_dl_call_back(bot, update):
         # command_to_exec = ["youtube-dl", "-f", youtube_dl_format, "--hls-prefer-ffmpeg", "--recode-video", "mp4", "-k", youtube_dl_url, "-o", download_directory]
         minus_f_format = youtube_dl_format
         if "youtu" in youtube_dl_url:
-            minus_f_format = youtube_dl_format + "+bestaudio"
+            for for_mat in response_json["formats"]:
+                format_id = for_mat.get("format_id")
+                if format_id == youtube_dl_format:
+                    acodec = for_mat.get("acodec")
+                    vcodec = for_mat.get("vcodec")
+                    if acodec == "none" or vcodec == "none":
+                        minus_f_format = youtube_dl_format + "+bestaudio"
+                    break
         command_to_exec = [
             "youtube-dl",
             "-c",
-            "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
+            #"--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--embed-subs",
             "-f", minus_f_format,
             "--hls-prefer-ffmpeg", youtube_dl_url,
@@ -153,8 +162,12 @@ async def youtube_dl_call_back(bot, update):
         command_to_exec.append(youtube_dl_password)
     command_to_exec.append("--no-warnings")
     # command_to_exec.append("--quiet")
-    #command_to_exec.append("--restrict-filenames")
-    logger.info(command_to_exec)
+    command_to_exec.append("--restrict-filenames")
+    #
+    if "hotstar" in youtube_dl_url:
+        command_to_exec.append("--geo-bypass-country")
+        command_to_exec.append("IN")
+    LOGGER.info(command_to_exec)
     start = datetime.now()
     process = await asyncio.create_subprocess_exec(
         *command_to_exec,
@@ -176,7 +189,7 @@ async def youtube_dl_call_back(bot, update):
             message_id=update.message.message_id,
             text=error_message
         )
-        return False
+        return False, None
     if t_response:
         # logger.info(t_response)
         os.remove(save_ytdl_json_path)
