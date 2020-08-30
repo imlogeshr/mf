@@ -34,7 +34,7 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["ffmpegrobot"]))
+@pyrogram.Client.on_message(pyrogram.Filters.command(["ffmpeginfo"]))
 async def ffmpegrobot_ad(bot, update):
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
@@ -198,7 +198,7 @@ async def storage_info(bot, update):
         )
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["clearffmpegmedia"]))
+@pyrogram.Client.on_message(pyrogram.Filters.command(["clearvid"]))
 async def clear_media(bot, update):
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
@@ -218,7 +218,7 @@ async def clear_media(bot, update):
     )
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["downloadmedia"]))
+@pyrogram.Client.on_message(pyrogram.Filters.command(["savevid"]))
 async def download_media(bot, update):
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
