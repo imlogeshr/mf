@@ -35,26 +35,24 @@ There is No Expire Limit"""
     HELP_USER = """There are multiple things I can perfom:
 📌 Url Uploader
 1. Send url (Link|New Name with Extension).
-2. Send Custom Thumbnail (Optional).
-3. Select the button.
+2. Select the button.
    SVideo - Give File as video with Screenshots
    DFile  - Give File with Screenshots
    Video  - Give File as video without Screenshots
    File   - Give File without ScreenshotsUpload as file from any HTTP link, with custom thumbnail support</a>
-📌 /deletethumbnail - Delete / Clear saved Custom Thumbnail
+📌 /savethumbnail - save Custom Thumbnail
+📌 /clearthumbnail - Delete / Clear saved Custom Thumbnail
 📌 /getlink - Get Low Speed Direct Download Link
 📌 /conv2aud - Convert Video Files in Telegram to Telegram Audios
 📌 /conv2vid - Convert to Streamable Video
 📌 /conv2doc - Convert to Document
 📌 /rename - (Long Press) and Rename Telegram Media
-📌 /extractstreams - Extract Streams from Telegram media
-📌 /ffmpegrobot - Get Info
+📌 /ffmpeginfo - Get Info
 📌 /trim - (Long Press) and Enter TimeStamp
-📌 /downloadmedia - Download media to storage
+📌 /savevid - Download media to storage
 📌 /storageinfo - Get Info about currently saved Media in storage
-📌 /clearffmpegmedia - Clear stored media from storage
+📌 /clearvid - Clear stored media from storage
 📌 /unzip - Extract Compressed Files, inside Telegram
-📌 /generatecustomthumbnail - Generate Custom Thumbnail for your streamable videos
 📌 /generatescss - Generate SCreenShotS of Telegram media"""
     REPLY_TO_DOC_GET_LINK = "Reply to a Telegram media to get High Speed Direct Download Link"
     REPLY_TO_DOC_FOR_C2d = "Reply to a Telegram video to convert"
