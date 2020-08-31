@@ -47,7 +47,7 @@ async def savethumbnail(bot, update):
         # create download directory, if not exist
         if not os.path.isdir(download_location):
             os.makedirs(download_location)
-        await sql.df_thumb(update.from_user.id, update.message_id)
+        await sql.df_thumb(update.from_user.id, update.reply_to_message.message_id)
         await bot.download_media(
             message=update.reply_to_message,
             file_name=download_location
@@ -55,7 +55,7 @@ async def savethumbnail(bot, update):
     else:
         # received single photo
         download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
-        await sql.df_thumb(update.from_user.id, update.message_id)
+        await sql.df_thumb(update.from_user.id, update.reply_to_message.message_id)
         await bot.download_media(
             message=update.reply_to_message,
             file_name=download_location
