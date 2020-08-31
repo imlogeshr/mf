@@ -51,7 +51,7 @@ async def extract_sub_title(bot, update):
             reply_to_message_id=update.message_id
         )
         return
-    download_location = Config.DOWNLOAD_LOCATION + "/"
+    download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".srt"
     if update.reply_to_message is not None:
         text = update.reply_to_message.text
         if text is not None and text.startswith("http"):
