@@ -33,6 +33,7 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from helper_funcs.display_progress import humanbytes
 from helper_funcs.help_uploadbot import DownLoadFile
 from helper_funcs.database import *
+global command_to_exec
 
 
 @pyrogram.Client.on_message(pyrogram.Filters.regex(pattern=".*http.*"))
