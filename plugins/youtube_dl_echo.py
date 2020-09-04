@@ -92,7 +92,6 @@ async def echo(bot, update):
                 o = entity.offset
                 l = entity.length
                 url = url[o:o + l]
-    global command_to_exec
     #if Config.HTTP_PROXY != "":
         #command_to_exec = [
             #"youtube-dl",
@@ -120,7 +119,8 @@ async def echo(bot, update):
     if youtube_dl_password is not None:
         command_to_exec.append("--password")
         command_to_exec.append(youtube_dl_password)
-        #logger.info(command_to_exec)
+        logger.info(command_to_exec)
+        global (command_to_exec)
     process = await asyncio.create_subprocess_exec(
         *command_to_exec,
         # stdout must a pipe to be accessible as process.stdout
