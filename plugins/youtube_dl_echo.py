@@ -92,6 +92,7 @@ async def echo(bot, update):
                 o = entity.offset
                 l = entity.length
                 url = url[o:o + l]
+    global command_to_exec
     #if Config.HTTP_PROXY != "":
         #command_to_exec = [
             #"youtube-dl",
@@ -109,7 +110,6 @@ async def echo(bot, update):
             "-j",
             url
         ]
-    global command_to_exec
     if "hotstar" in url:
         command_to_exec.append("--geo-bypass-country")
         command_to_exec.append("IN")
