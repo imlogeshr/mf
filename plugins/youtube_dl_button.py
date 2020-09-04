@@ -61,7 +61,7 @@ async def youtube_dl_call_back(bot, update):
         return False
     youtube_dl_url = update.message.reply_to_message.text
     custom_file_name = str(response_json.get("title")) + \
-        "_" + youtube_dl_format + "." + youtube_dl_ext
+        "." + youtube_dl_ext
     youtube_dl_username = None
     youtube_dl_password = None
     if "|" in youtube_dl_url:
@@ -154,7 +154,7 @@ async def youtube_dl_call_back(bot, update):
         command_to_exec.append(youtube_dl_password)
     command_to_exec.append("--no-warnings")
     # command_to_exec.append("--quiet")
-    #command_to_exec.append("--restrict-filenames")
+    command_to_exec.append("--restrict-filenames")
     #
     if "hotstar" in youtube_dl_url:
         command_to_exec.append("--geo-bypass-country")
@@ -181,7 +181,7 @@ async def youtube_dl_call_back(bot, update):
             message_id=update.message.message_id,
             text=error_message
         )
-        return False
+        return None, error_message, None
     if t_response:
         # logger.info(t_response)
         os.remove(save_ytdl_json_path)
