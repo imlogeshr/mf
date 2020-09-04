@@ -145,7 +145,7 @@ async def echo(bot, update):
             parse_mode="html",
             disable_web_page_preview=True
         )
-        return None, error_message, None
+        return False
     if t_response:
         # logger.info(t_response)
         x_reponse = t_response
