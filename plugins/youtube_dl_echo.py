@@ -33,7 +33,6 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from helper_funcs.display_progress import humanbytes
 from helper_funcs.help_uploadbot import DownLoadFile
 from helper_funcs.database import *
-global command_to_exec
 
 
 @pyrogram.Client.on_message(pyrogram.Filters.regex(pattern=".*http.*"))
@@ -93,16 +92,16 @@ async def echo(bot, update):
                 o = entity.offset
                 l = entity.length
                 url = url[o:o + l]
-    if Config.HTTP_PROXY != "":
-        command_to_exec = [
-            "youtube-dl",
-            "--no-warnings",
-            "--youtube-skip-dash-manifest",
-            "-j",
-            url,
-            "--proxy", Config.HTTP_PROXY
-        ]
-    else:
+    #if Config.HTTP_PROXY != "":
+        #command_to_exec = [
+            #"youtube-dl",
+            #"--no-warnings",
+            #"--youtube-skip-dash-manifest",
+            #"-j",
+            #url,
+            #"--proxy", Config.HTTP_PROXY
+        #]
+    #else:
         command_to_exec = [
             "youtube-dl",
             "--no-warnings",
@@ -110,9 +109,9 @@ async def echo(bot, update):
             "-j",
             url
         ]
-    #if "hotstar" in url:
-        #command_to_exec.append("--geo-bypass-country")
-        #command_to_exec.append("IN")
+    if "hotstar" in url:
+        command_to_exec.append("--geo-bypass-country")
+        command_to_exec.append("IN")
     #
     if youtube_dl_username is not None:
         command_to_exec.append("--username")
@@ -120,7 +119,7 @@ async def echo(bot, update):
     if youtube_dl_password is not None:
         command_to_exec.append("--password")
         command_to_exec.append(youtube_dl_password)
-    logger.info(command_to_exec)
+        #logger.info(command_to_exec)
     process = await asyncio.create_subprocess_exec(
         *command_to_exec,
         # stdout must a pipe to be accessible as process.stdout
@@ -130,9 +129,9 @@ async def echo(bot, update):
     # Wait for the subprocess to finish
     stdout, stderr = await process.communicate()
     e_response = stderr.decode().strip()
-    logger.info(e_response)
+    # logger.info(e_response)
     t_response = stdout.decode().strip()
-    logger.info(t_response)
+    # logger.info(t_response)
     # https://github.com/rg3/youtube-dl/issues/2630#issuecomment-38635239
     if e_response and "nonnumeric port" not in e_response:
         # logger.warn("Status : FAIL", exc.returncode, exc.output)
