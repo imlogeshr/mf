@@ -92,16 +92,16 @@ async def echo(bot, update):
                 o = entity.offset
                 l = entity.length
                 url = url[o:o + l]
-    #if Config.HTTP_PROXY != "":
-        #command_to_exec = [
-            #"youtube-dl",
-            #"--no-warnings",
-            #"--youtube-skip-dash-manifest",
-            #"-j",
-            #url,
+    if Config.HTTP_PROXY != "":
+        command_to_exec = [
+            "youtube-dl",
+            "--no-warnings",
+            "--youtube-skip-dash-manifest",
+            "-j",
+            url,
             #"--proxy", Config.HTTP_PROXY
-        #]
-    #else:
+        ]
+    else:
         command_to_exec = [
             "youtube-dl",
             "--no-warnings",
@@ -119,7 +119,7 @@ async def echo(bot, update):
     if youtube_dl_password is not None:
         command_to_exec.append("--password")
         command_to_exec.append(youtube_dl_password)
-        #logger.info(command_to_exec)
+    logger.info(command_to_exec)
     process = await asyncio.create_subprocess_exec(
         *command_to_exec,
         # stdout must a pipe to be accessible as process.stdout
