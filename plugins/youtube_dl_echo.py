@@ -93,16 +93,16 @@ async def echo(bot, update):
                 o = entity.offset
                 l = entity.length
                 url = url[o:o + l]
-    #if Config.HTTP_PROXY != "":
-        #command_to_exec = [
-            #"youtube-dl",
-            #"--no-warnings",
-            #"--youtube-skip-dash-manifest",
-            #"-j",
-            #url,
+    if Config.HTTP_PROXY != "":
+        command_to_exec = [
+            "youtube-dl",
+            "--no-warnings",
+            "--youtube-skip-dash-manifest",
+            "-j",
+            url,
             #"--proxy", Config.HTTP_PROXY
-        #]
-    #else:
+        ]
+    else:
         command_to_exec = [
             "youtube-dl",
             "--no-warnings",
@@ -110,9 +110,9 @@ async def echo(bot, update):
             "-j",
             url
         ]
-    if "hotstar" in url:
-        command_to_exec.append("--geo-bypass-country")
-        command_to_exec.append("IN")
+    #if "hotstar" in url:
+        #command_to_exec.append("--geo-bypass-country")
+        #command_to_exec.append("IN")
     #
     if youtube_dl_username is not None:
         command_to_exec.append("--username")
