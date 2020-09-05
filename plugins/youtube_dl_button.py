@@ -107,10 +107,10 @@ async def youtube_dl_call_back(bot, update):
         message_id=update.message.message_id
     )
     description = Translation.CUSTOM_CAPTION_UL_FILE
-    if custom_file_name is not None:
-        description = custom_file_name
-    else:
+   if "fulltitle" in response_json:
         description = response_json["fulltitle"][0:1021]
+   else:
+        description = custom_file_name
         # escape Markdown and special characters
     tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id)
     if not os.path.isdir(tmp_directory_for_each_user):
@@ -154,11 +154,11 @@ async def youtube_dl_call_back(bot, update):
         command_to_exec.append(youtube_dl_password)
     command_to_exec.append("--no-warnings")
     # command_to_exec.append("--quiet")
-    command_to_exec.append("--restrict-filenames")
+    #command_to_exec.append("--restrict-filenames")
     #
-    if "hotstar" in youtube_dl_url:
-        command_to_exec.append("--geo-bypass-country")
-        command_to_exec.append("IN")
+    #if "hotstar" in youtube_dl_url:
+        #command_to_exec.append("--geo-bypass-country")
+        #command_to_exec.append("IN")
     logger.info(command_to_exec)
     start = datetime.now()
     process = await asyncio.create_subprocess_exec(
