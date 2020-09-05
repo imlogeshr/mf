@@ -93,16 +93,16 @@ async def echo(bot, update):
                 o = entity.offset
                 l = entity.length
                 url = url[o:o + l]
-    #if Config.HTTP_PROXY != "":
-        #command_to_exec = [
-            #"youtube-dl",
-            #"--no-warnings",
-            #"--youtube-skip-dash-manifest",
-            #"-j",
-            #url,
-            #"--proxy", Config.HTTP_PROXY
-        #]
-    #else:
+    if Config.HTTP_PROXY != "":
+        command_to_exec = [
+            "youtube-dl",
+            "--no-warnings",
+            "--youtube-skip-dash-manifest",
+            "-j",
+            url,
+            "--proxy", Config.HTTP_PROXY
+        ]
+    else:
         command_to_exec = [
             "youtube-dl",
             "--no-warnings",
