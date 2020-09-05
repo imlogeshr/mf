@@ -316,7 +316,7 @@ async def youtube_dl_call_back(bot, update):
                 await bot.send_video(
                     chat_id=update.message.chat.id,
                     video=download_directory,
-                    caption=description.rsplit('.', 1)[0] + Config.CH_CAPTION,
+                    caption=description + Config.CH_CAPTION,
                     parse_mode="HTML",
                     duration=duration,
                     width=width,
