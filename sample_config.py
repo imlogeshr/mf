@@ -34,5 +34,6 @@ class Config(object):
     # Sql Database url
     DB_URI = os.environ.get("DATABASE_URL", "")
     CH_CAPTION = os.environ.get("CHANNEL_CAPTION", "")
+    HTTP_PROXY = os.environ.get("HTTP_PROXY", "")
 
 
