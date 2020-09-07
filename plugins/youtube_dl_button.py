@@ -17,7 +17,7 @@ import math
 import os
 import shutil
 import time
-from datetime import datetime
+#from datetime import datetime
 
 # the secret configuration specific things
 if bool(os.environ.get("WEBHOOK", False)):
@@ -253,13 +253,13 @@ async def youtube_dl_call_back(bot, update):
                 # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
                 
             else:
-                mes = await get_thumb(update.from_user.id)
-                if mes != None:
-                    m = await bot.get_messages(update.chat.id, mes.msg_id)
-                    await m.download(file_name=thumb_image_path)
-                    thumb_image_path = thumb_image_path
-                else:
-                    thumb_image_path = None
+                #mes = await get_thumb(update.from_user.id)
+                #if mes != None:
+                    #m = await bot.get_messages(update.chat.id, mes.msg_id)
+                    #await m.download(file_name=thumb_image_path)
+                    #thumb_image_path = thumb_image_path
+                #else:
+                thumb_image_path = None
             start_time = time.time()
             # try to upload file
             if tg_send_type == "audio":
